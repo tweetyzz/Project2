@@ -657,8 +657,10 @@ reg	[4:0]	cnt		;
 always @ (posedge clk_bit or negedge rst_n) begin
 	if(rst_n == 1'b0) begin
 		cnt <= 6'd0;
-	end else begin
-		if(cnt >= 6'd33) begin
+	end else if(i_buzz_en == 1'b0) begin
+	    cnt <= 6'd0 ;
+	    end else begin
+		if(cnt >= 6'd40) begin
 			cnt <= 6'd0;
 		end else begin
 			cnt <= cnt + 1'd1;
@@ -705,6 +707,17 @@ always @ (*) begin
 		6'd30: nco_num = G0	;
 		6'd31: nco_num = E2	;
 		6'd32: nco_num = D0	; //
+		
+		6'd33: nco_num = G0	;
+		6'd34: nco_num = A0	;
+		6'd35: nco_num = F1	;
+		6'd36: nco_num = G0	;
+		6'd37: nco_num = E0	;
+		6'd38: nco_num = F1	;
+		6'd39: nco_num = E2	;
+		
+		
+		
 	endcase
 end
 
@@ -885,6 +898,8 @@ buzz		u_buzz	(	.o_buzz		( o_alarm	),
 
 
 endmodule
+
+
 
 
 
